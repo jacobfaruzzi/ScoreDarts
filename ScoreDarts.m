@@ -1,4 +1,5 @@
 function ScoreDarts()
 addpath(genpath(pwd));
-appData = newFigure();
+appData = [];
+newFigure(appData);
 end
