@@ -14,19 +14,19 @@ currPos = struct2table(appData.Position);
 remPlayers = (~isnan(str2double(appData.(table).Data(1,:).Variables)) & condition);
 remNames = string(appData.(table).ColumnName(remPlayers));
 if ~isempty(remNames)
-remScores = str2double(appData.(table).Data{1,remNames});
+    remScores = str2double(appData.(table).Data{1,remNames});
 
-[~,idx] = sort(remScores,"ascend");
+    [~,idx] = sort(remScores,"ascend");
 
-remNames = remNames(idx);
-remPos = numToOrdinal((height(currPos)+1: + height(currPos)+numel(remNames))');
+    remNames = remNames(idx);
+    remPos = numToOrdinal((height(currPos)+1: + height(currPos)+numel(remNames))');
 
-tempTable(:,1) = remNames;
-tempTable(:,2) = remPos;
+    tempTable(:,1) = remNames;
+    tempTable(:,2) = remPos;
 
-addRows = array2table(tempTable,"VariableNames",{'player','place'});
+    addRows = array2table(tempTable,"VariableNames",{'player','place'});
 
-currPos = [currPos;addRows];
+    currPos = [currPos;addRows];
 end
 players = currPos.("player");
 places = currPos.("place");
