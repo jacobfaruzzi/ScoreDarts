@@ -62,7 +62,7 @@ if appData.checkIn == 2 % double out
     if (appData.X01Table.Data.(currPlayer)(1) == "0" && appData.multiplier ~= 2) || appData.X01Table.Data.(currPlayer)(1) == "1"
         appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
         appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
-
+        appData.currPlayerTurn = 3;
         appData = turnCounter(appData);
         setappData(appData);
         return;
@@ -71,7 +71,7 @@ elseif appData.checkIn == 3 % master out
     if (appData.X01Table.Data.(currPlayer)(1) == "0" && (appData.multiplier ~= 2 ||appData.multiplier ~= 3 || numHit ~= 25))||appData.X01Table.Data.(currPlayer)(1) == "1"
         appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
         appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
-
+        appData.currPlayerTurn = 3;
         appData = turnCounter(appData);
         setappData(appData);
         return;
