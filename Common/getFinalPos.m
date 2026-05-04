@@ -27,8 +27,6 @@ tempTable(:,2) = remPos;
 addRows = array2table(tempTable,"VariableNames",{'player','place'});
 
 currPos = [currPos;addRows];
-else
-    
 end
 players = currPos.("player");
 places = currPos.("place");
