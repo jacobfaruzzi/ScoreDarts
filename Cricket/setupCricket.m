@@ -18,10 +18,14 @@ function appData = setupTable(appData)
 appData.cricketPanel = uipanel(appData.mainFig,"Position",[10 10 980 980]);
 appData.Players = "Player " + string(1:appData.numPlayers);
 
-idx = floor(appData.numPlayers/2+1);
-varName1 = appData.Players(1:idx-1);
-varName2 = appData.Players(idx:end);
-varName = [varName1 "-" varName2];
+if appData.numPlayers == 1
+    varName = [appData.Players "-"];
+else
+    idx = floor(appData.numPlayers/2+1);
+    varName1 = appData.Players(1:idx-1);
+    varName2 = appData.Players(idx:end);
+    varName = [varName1 "-" varName2];
+end
 
 
 c = strings(8,appData.numPlayers+1);

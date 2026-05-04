@@ -1,7 +1,25 @@
 function setupX01(src)
 appData = getappData(src);
 appData.numPlayers = appData.numPlayersBtn.Value;
-
+checkInOut = appData.gameSettings.Value;
+checkIn  = string(extractBefore(checkInOut," In/"));
+checkOut = string(extractBetween(checkInOut,"In/"," Out"));
+switch checkIn
+    case "Straight"
+        appData.checkIn = 1;
+    case "Double"
+        appData.checkIn = 2;
+    case "Master"
+       appData.checkIn = 3;
+end
+switch checkOut
+    case "Straight"
+        appData.checkOut = 1;
+    case "Double"
+        appData.checkOut = 2;
+    case "Master"
+       appData.checkOut = 3;
+end
 appData = setupTable(appData);
 
 appData = setupButtons(appData);
@@ -21,10 +39,14 @@ function appData = setupTable(appData)
 appData.X01Panel = uipanel(appData.mainFig,"Position",[10 10 980 980]);
 appData.Players = "Player " + string(1:appData.numPlayers);
 
-idx = floor(appData.numPlayers/2+1);
-varName1 = appData.Players(1:idx-1);
-varName2 = appData.Players(idx:end);
-varName = [varName1 "-" varName2];
+if appData.numPlayers == 1
+    varName = [appData.Players "-"];
+else
+    idx = floor(appData.numPlayers/2+1);
+    varName1 = appData.Players(1:idx-1);
+    varName2 = appData.Players(idx:end);
+    varName = [varName1 "-" varName2];
+end
 
 c = strings(5,appData.numPlayers+1);
 c(1,:) = appData.gameSelect.Value;
