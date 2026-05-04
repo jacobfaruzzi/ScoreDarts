@@ -58,6 +58,26 @@ else
     appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
 end
 
+if appData.checkIn == 2 % double out
+    if (appData.X01Table.Data.(currPlayer)(1) == "0" && appData.multiplier ~= 2) || appData.X01Table.Data.(currPlayer)(1) == "1"
+        appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
+        appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
+
+        appData = turnCounter(appData);
+        setappData(appData);
+        return;
+    end
+elseif appData.checkIn == 3 % master out
+    if (appData.X01Table.Data.(currPlayer)(1) == "0" && (appData.multiplier ~= 2 ||appData.multiplier ~= 3 || numHit ~= 25))||appData.X01Table.Data.(currPlayer)(1) == "1"
+        appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
+        appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
+
+        appData = turnCounter(appData);
+        setappData(appData);
+        return;
+    end
+end
+
 if appData.numPlayers > 1 && currDart == appData.currScore
     [place,appData] = setPosition(currPlayer,appData);
     msg = sprintf(currPlayer + " came in " + place + " Place!\n\nWould you like to continue the game?" );
