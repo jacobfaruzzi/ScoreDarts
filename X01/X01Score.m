@@ -21,25 +21,40 @@ else
 end
 currDart = numHit*appData.multiplier;
 if appData.currPlayerTurn == 1
-appData.X01Table.Data.(currPlayer)(2:5) = "";
+    appData.X01Table.Data.(currPlayer)(2:5) = "";
 end
 
-if src.Text ~= "MISS"
+if src.Text == "MISS"
+    appData.X01Table.Data.(currPlayer)(appData.currPlayerTurn+1) = src.Text;
+elseif src.Text == "B"
+    appData.X01Table.Data.(currPlayer)(appData.currPlayerTurn+1) = "BULLSEYE (x" + string(appData.multiplier)+")";
+    appData.roundScore = 25*appData.multiplier+appData.roundScore;
+else
     appData.X01Table.Data.(currPlayer)(appData.currPlayerTurn+1) = src.Text + " (x" + string(appData.multiplier)+")";
     dartScore = replace(src.Text + " x" + string(appData.multiplier),'x','*');
     appData.roundScore = eval(dartScore)+appData.roundScore;
-else
-    appData.X01Table.Data.(currPlayer)(appData.currPlayerTurn+1) = src.Text;
 end
 
 
 appData.X01Table.Data.(currPlayer)(5) = string(appData.roundScore);
-if currDart > appData.currScore
+if appData.currScore == str2double(appData.gameSelect.Value)
+    if appData.checkIn == 1
+        appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
+    elseif appData.checkIn == 2
+        if appData.multiplier == 2
+            appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
+        end
+    elseif appData.checkIn == 3
+        if appData.multiplier == 3
+            appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
+        end
+    end
+elseif currDart > appData.currScore
     appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
     appData.currPlayerTurn = 3;
-appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
+    appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
 else
-    appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;    
+    appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
 end
 
 if appData.numPlayers > 1 && currDart == appData.currScore
