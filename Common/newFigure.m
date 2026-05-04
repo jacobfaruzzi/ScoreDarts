@@ -16,7 +16,9 @@ appData.minusBtn = uibutton(appData.startPanel, 'Text', '-','Position', [330 250
 
 appData.plusBtn = uibutton(appData.startPanel, 'Text', '+', 'Position', [580 250 50 80], 'ButtonPushedFcn', @(btn, event) incrementValue(appData.numPlayersBtn, 1));
 
-appData.gameSelect = uidropdown(appData.startPanel,"Items",{'Cricket','501'},"Position",[330 150 300 80]);
+
+Modes = {'Cricket','101','201','301','401','501','601','701','801','901','1001'};
+appData.gameSelect = uidropdown(appData.startPanel,"Items",Modes,"Position",[330 150 300 80]);
 
 appData.startGame = uibutton(appData.startPanel,"Text","Start Game","Position",[330 50 300 50],"UserData",appData,"ButtonPushedFcn",@setupGame);
 

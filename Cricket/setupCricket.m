@@ -26,9 +26,9 @@ varName = [varName1 "-" varName2];
 
 c = strings(8,appData.numPlayers+1);
 c(1,:) = "0";
-critcketData = array2table(c,"VariableNames",varName);
+cricketData = array2table(c,"VariableNames",varName);
 
-appData.cricketTable = uitable(appData.cricketPanel,"Data",critcketData,'OuterPosition',[10 390 960 391.5],"CellSelectionCallback",@cellSelected,'FontSize',30);
+appData.cricketTable = uitable(appData.cricketPanel,"Data",cricketData,'OuterPosition',[10 390 960 391.5],"CellSelectionCallback",@cellSelected,'FontSize',30);
 appData.cricketTable.Data.("-")(1) = "SCORE";
 appData.cricketTable.Data.("-")(2) = "15";
 appData.cricketTable.Data.("-")(3) = "16";

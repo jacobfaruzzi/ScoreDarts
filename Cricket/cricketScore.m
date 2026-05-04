@@ -41,7 +41,7 @@ if isScore
         appData.cricketTable.Data.(heading(i))(1) = string(str2double(appData.cricketTable.Data.(heading(i))(1))+addScore*(appData.multiplier-subMult));
     end
 end
-% Add Winning Logic Here
+
 if sum(appData.cricketTable.Data.(currPlayer) == char(8855)) == 7 && appData.numPlayers > 2 && ...
         sum(str2double(appData.cricketTable.Data.(currPlayer)(1)) < str2double(appData.cricketTable.Data{1,(~isnan(str2double(appData.cricketTable.Data{1,:})))})) == appData.numPlayers-1
     [place,appData] = setPosition(currPlayer,appData);
@@ -64,45 +64,16 @@ if sum(appData.cricketTable.Data.(currPlayer) == char(8855)) == 7 && appData.num
             addStyle(appData.cricketTable, s, 'column', idx);
             appData.currPlayerTurn = 0;
         case 'End Game'
-            [~,appData] = setPosition(currPlayer,appData);
-            gaveOver(appData);
+            gameOver(appData);
             return;
     end
 elseif sum(appData.cricketTable.Data.(currPlayer) == char(8855)) == 7 && appData.numPlayers <= 2 && ...
         sum(str2double(appData.cricketTable.Data.(currPlayer)(1)) < str2double(appData.cricketTable.Data{1,(~isnan(str2double(appData.cricketTable.Data{1,:})))})) == appData.numPlayers-1
-    [~,appData] = setPosition(currPlayer,appData);
-    gaveOver(appData);
+    gameOver(appData);
     return;
 end
-% ----------------------
-if appData.currPlayerTurn == 3
-    s = uistyle('BackgroundColor', [1 1 1]);
-    addStyle(appData.cricketTable, s, 'column', idx);
-    appData.currPlayerTurn = 1;
-    if appData.currPlayerIdx == appData.numPlayers
-        appData.currPlayerIdx = 1;
-    else
-        appData.currPlayerIdx = appData.currPlayerIdx+1;
-    end
-    idx = find(strcmp(appData.cricketTable.ColumnName ,appData.Players(appData.currPlayerIdx)));
-    s = uistyle('BackgroundColor', 'yellow');
-    addStyle(appData.cricketTable, s, 'column', idx);
-else
-    appData.currPlayerTurn = appData.currPlayerTurn+1;
-end
-setappData(appData);
-end
 
-function gaveOver(appData)
-[players,places] = getFinalCricketPos(appData);
-msg = sprintf("%s\n\n",places + " Place " + players);
-endConfrim = uiconfirm(appData.mainFig,msg,'Game Over','Options',{'Play Again','Main Menu'});
-appData = rmfield(appData,'Position');
-appData.mainFig.UserData = appData;
-switch endConfrim
-    case 'Play Again'               
-        setupCricket(appData.mainFig);
-    case 'Main Menu'
-        newFigure(appData);
-end
+appData = turnCounter(appData);
+
+setappData(appData);
 end
