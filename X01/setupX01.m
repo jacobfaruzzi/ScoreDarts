@@ -9,7 +9,7 @@ switch checkIn
         appData.checkIn = 1;
     case "Double"
         appData.checkIn = 2;
-    case "Triple"
+    case "Master"
        appData.checkIn = 3;
 end
 switch checkOut

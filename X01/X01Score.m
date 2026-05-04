@@ -45,7 +45,8 @@ if appData.currScore == str2double(appData.gameSelect.Value)
             appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
         end
     elseif appData.checkIn == 3
-        if appData.multiplier == 3
+        % Master in can be either double triple or bulls
+        if appData.multiplier == 2 || appData.multiplier == 3 || numHit == 25
             appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
         end
     end
