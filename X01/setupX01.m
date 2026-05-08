@@ -29,6 +29,8 @@ appData.currPlayerTurn = 1;
 s = uistyle('BackgroundColor', 'yellow');
 addStyle(appData.X01Table, s, 'column', appData.currPlayerIdx);
 
+appData = undoBtn('X01Panel',appData);
+
 setappData(appData);
 
 end
