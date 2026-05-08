@@ -58,7 +58,7 @@ else
     appData.X01Table.Data.(currPlayer)(1) = appData.currScore-currDart;
 end
 
-if appData.checkIn == 2 % double out
+if appData.checkOut == 2 % double out
     if (appData.X01Table.Data.(currPlayer)(1) == "0" && appData.multiplier ~= 2) || appData.X01Table.Data.(currPlayer)(1) == "1"
         appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
         appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
@@ -67,8 +67,8 @@ if appData.checkIn == 2 % double out
         setappData(appData);
         return;
     end
-elseif appData.checkIn == 3 % master out
-    if (appData.X01Table.Data.(currPlayer)(1) == "0" && (appData.multiplier ~= 2 ||appData.multiplier ~= 3 || numHit ~= 25))||appData.X01Table.Data.(currPlayer)(1) == "1"
+elseif appData.checkOut == 3 % master out
+    if (appData.X01Table.Data.(currPlayer)(1) == "0" && (appData.multiplier ~= 2 && appData.multiplier ~= 3 && numHit ~= 25))|| appData.X01Table.Data.(currPlayer)(1) == "1"
         appData.X01Table.Data.(currPlayer)(1) = appData.prevScore;
         appData.X01Table.Data.(currPlayer)(5) = "BUST -- "+string(appData.roundScore);
         appData.currPlayerTurn = 3;
